@@ -27,6 +27,13 @@
       "biografia": "O Homem-Aranha (Spider-Man no original) o alter-ego de Peter Parker, é um personagem fictício, um super-herói que aparece nas revistas em quadrinhos (banda desenhada em Portugal) americanas publicadas pela Marvel Comics, existindo no seu universo partilhado.",
       "editora": 2,
       "id": 4
+    },
+    {
+      "nome": "Homem Aranha",
+      "foto": "https://uploads.jovemnerd.com.br/wp-content/uploads/2017/07/listavitrine-1210x544.jpg",
+      "biografia": "Poderes de aranha",
+      "editora": 3,
+      "id": 5
     }
   ],
   "editoras": [

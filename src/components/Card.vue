@@ -1,49 +1,38 @@
 <template>
-  <li class="card">
-    <h2 class="card__nome">{{heroi.nome}}</h2>
-    <img class="card__imagem" :src="heroi.foto" :alt="heroi.nome"/>
-    <p class="card__superpoder">{{heroi.superpoder}}</p>
-    <p class="card__editora">{{editoras[heroi.grupo]}}</p>
-    <my-button funcao="deletar" @click.native="action(heroi._id)"> </my-button>
-  </li>
+  <v-card elevation="4">
+    <v-card-title> {{ hero.nome }} </v-card-title>
+    <v-img :src="hero.foto" height="230px"></v-img>
+    <v-card-subtitle> {{ comic }} </v-card-subtitle>
+    <v-card-text :title="hero.biografia">
+      {{ hero.biografia.substring(0, 150) }}...
+    </v-card-text>
+    <v-card-actions>
+      <v-btn color="primary" text> Editar </v-btn>
+      <v-btn color="error" @click="action(hero.id)" text> Excluir </v-btn>
+      <v-spacer></v-spacer>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
-import MyButton from '@/components/MyButton.vue';
-import gruposService from '@/services/gruposService';
-
 export default {
   name: "Card",
   props: {
-    heroi: {
-      type: Object,
-      required: true,
-    }
-  },
-  data() {
-    return {
-      editoras: [ ]
-    }
-  },
-  components: { 
-    MyButton
+    hero: Object,
+    comic: String,
   },
   methods: {
     action(heroiId) {
-      if(confirm('Deseja mesmo deletar?')) {
-        this.$emit('deletarEmitido', heroiId)
+      if (confirm("Deseja mesmo deletar?")) {
+        this.$emit("delEmited", heroiId);
       }
-    }
+    },
   },
-  mounted() {
-    gruposService
-      .getAllGroups()
-      .then(response => this.editoras = response.map((editora) => editora.nome))
-  }
 };
 </script>
 
 <style lang="scss">
+/*
 .card {
   border-radius: 10px;
   padding: 10px;
@@ -67,4 +56,5 @@ export default {
     margin: 10px 0 15px;
   }
 }
+*/
 </style>

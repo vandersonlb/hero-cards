@@ -4,14 +4,14 @@ const url = "http://localhost:3000";
 export default {
   getAllGroups() {
     return axios
-      .get(`${url}/grupos/`)
+      .get(`${url}/editoras/`)
       .then((response) => response.data)
       .catch((error) => error);
   },
 
-  getHeroesByGroup(grupoId) {
+  getHeroesByGroup(groupId) {
     return axios
-      .get(`${url}/herois/grupo/${grupoId}`)
+      .get(`${url}/herois?editora=${groupId}`)
       .then((response) => response.data)
       .catch((error) => error);
   },

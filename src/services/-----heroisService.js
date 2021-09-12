@@ -11,7 +11,7 @@ export default {
 
   getHero(heroiId) {
     return axios
-      .get(`${url}/heroi/${heroiId}`)
+      .get(`${url}/herois/${heroiId}`)
       .then((response) => response.data)
       .catch((error) => error);
   },
@@ -25,7 +25,7 @@ export default {
 
   deleteHero(heroiId) {
     return axios
-      .delete(`${url}/heroi/${heroiId}`)
+      .delete(`${url}/herois/${heroiId}`)
       .then((response) => response.data)
       .catch((error) => error);
   },

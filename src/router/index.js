@@ -6,7 +6,7 @@ export default [
   },
   {
     path: "/cadastro",
-    component: () => import("@/views/Cadastro.vue"),
-    name: "cadastro",
+    component: () => import("@/views/Register.vue"),
+    name: "register",
   },
 ];
