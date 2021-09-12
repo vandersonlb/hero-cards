@@ -1,0 +1,42 @@
+{
+  "herois": [
+    {
+      "nome": "Superman",
+      "foto": "https://upload.wikimedia.org/wikipedia/pt/b/be/Super-Homem.jpg",
+      "superpoder": "Superforça",
+      "editora": 1,
+      "id": 1
+    },
+    {
+      "nome": "Batman",
+      "foto": "https://upload.wikimedia.org/wikipedia/pt/8/8d/Batman_por_Jim_Lee.jpg",
+      "superpoder": "Maior detetive do mundo",
+      "editora": 1,
+      "id": 2
+    },
+    {
+      "nome": "Homem de Ferro",
+      "foto": "https://www.comboinfinito.com.br/principal/wp-content/uploads/2017/07/homem-de-ferro-jogos-da-marvel.jpg",
+      "superpoder": "Maior detetive do mundo",
+      "editora": 2,
+      "id": 3
+    },
+    {
+      "nome": "Homem Aranha",
+      "foto": "https://uploads.jovemnerd.com.br/wp-content/uploads/2017/07/listavitrine-1210x544.jpg",
+      "superpoder": "Poderes aracnideos",
+      "editora": 2,
+      "id": 4
+    }
+  ],
+  "editoras": [
+    {
+      "id": 1,
+      "nome": "DC Comics"
+    },
+    {
+      "id": 2,
+      "nome": "Marvel"
+    }
+  ]
+}
