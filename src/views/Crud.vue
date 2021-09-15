@@ -35,14 +35,14 @@
 
 <script>
 import MyCard from "@/components/Card.vue";
-import groupService from "@/services/groupService";
-import heroService from "@/services/heroService";
+import api from "@/services";
 
 export default {
   name: "Crud",
   data() {
     return {
       groupHeroes: [],
+    
     };
   },
   components: {
@@ -50,24 +50,24 @@ export default {
   },
   async mounted() {
     try {
-      let groups = await groupService
+      let groups = await api.group
         .getAllGroups()
         .then((response) => response);
 
       groups.forEach((comic) => {
-        groupService
+        api.group
           .getHeroesByGroup(Number(comic.id))
           .then((heroes) =>
             heroes.length ? this.groupHeroes.push({ comic, heroes }) : false
           );
       });
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.error(err);
     }
   },
   methods: {
     delHero(heroId) {
-      heroService
+      api.hero
         .deleteHero(heroId)
         .then(() => this.delHeroFromView(heroId))
         .catch((err) => console.error(err));

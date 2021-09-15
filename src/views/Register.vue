@@ -60,8 +60,7 @@
 
 <script>
 import Hero from "@/models/Hero";
-import groupService from "@/services/groupService";
-import heroService from "@/services/heroService";
+import api from "@/services";
 
 export default {
   name: "Register",
@@ -73,24 +72,24 @@ export default {
     };
   },
   mounted() {
-    groupService
+    api.group
       .getAllGroups()
       .then((res) => (this.groups = res))
       .catch((err) => console.error(err));
 
     if (this.heroId)
-      heroService.getHero(this.heroId).then((res) => (this.hero = res));
+      api.hero.getHero(this.heroId).then((res) => (this.hero = res));
   },
   methods: {
     addHero() {
-      heroService
+      api.hero
         .addHero(this.hero)
         .then(() => this.$router.push({ name: "home" }))
         .then((this.hero = new Hero()))
         .catch((err) => console.error(err));
     },
     updateHero(hero) {
-      heroService
+      api.hero
         .updateHero(hero)
         .then(() => this.$router.push({ name: "home" }))
         .then((this.hero = new Hero()))
