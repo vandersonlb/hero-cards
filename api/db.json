@@ -2,15 +2,15 @@
   "herois": [
     {
       "nome": "Superman",
-      "foto": "https://upload.wikimedia.org/wikipedia/pt/b/be/Super-Homem.jpg",
+      "foto": "https://observatoriodocinema.uol.com.br/wp-content/uploads/2021/08/superman-1200x900-1.jpg",
       "biografia": "Superman é um super-herói criado pela dupla de autores de quadrinhos Joe Shuster e Jerry Siegel. ... O personagem nasceu no planeta fictício de Krypton e tinha o nome de Kal-El. Foi mandado à Terra por seu pai, Jor-El, um cientista, momentos antes do planeta explodir.",
       "editora": 1,
       "id": 1
     },
     {
       "nome": "Batman",
-      "foto": "https://upload.wikimedia.org/wikipedia/pt/8/8d/Batman_por_Jim_Lee.jpg",
-      "biografia": "Bruce Wayne é um bilionário americano, magnata de negócios, filantropo e dono da corporação Wayne Enterprises. ... Foi aí que surgiu Batman, o super-herói da cidade de Gotham. Apesar de não ter superpoderes, Batman faz uso de seu intelecto, conhecimento em artes marciais, destreza física e habilidades de detetive.",
+      "foto": "https://cdn.ome.lt/C-Sy2lAhPun7qX9xirwX2OGuDXI=/1200x630/smart/extras/conteudos/batman_r6JhNlr.png",
+      "biografia": "Bruce Wayne é um bilionário americano, magnata de negócios, filantropo e dono da corporação Wayne Enterprises. Foi aí que surgiu Batman, o super-herói da cidade de Gotham. Apesar de não ter superpoderes, Batman faz uso de seu intelecto, conhecimento em artes marciais, destreza física e habilidades de detetive.",
       "editora": 1,
       "id": 2
     },
@@ -27,6 +27,27 @@
       "biografia": "O Homem-Aranha (Spider-Man no original) o alter-ego de Peter Parker, é um personagem fictício, um super-herói que aparece nas revistas em quadrinhos (banda desenhada em Portugal) americanas publicadas pela Marvel Comics, existindo no seu universo partilhado.",
       "editora": 2,
       "id": 4
+    },
+    {
+      "nome": "Lanterna Verde",
+      "foto": "https://pbs.twimg.com/media/EZteigYXkAAJKrj.jpg",
+      "biografia": "O Lanterna Verde é um herói que possui sua origem na Era de Ouro dos Quadrinho, lá na década de 30, com poderes mágicos e atendendo pleo nome de Alan Scott. ... Conheça um pouco mais sobre Hal Jordan, um dos fundadores da Liga da Justiça (nos quadrinhos) e o maior Lanterna Verde da história.",
+      "editora": 1,
+      "id": 5
+    },
+    {
+      "nome": "Flash",
+      "foto": "https://kanto.legiaodosherois.com.br/w760-h398-gnw-cfill-q80/wp-content/uploads/2020/05/legiao_VECrsH9Qb8qY.jpg.jpeg",
+      "biografia": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tristique est risus, nec ornare lacus ultricies eget. Phasellus vehicula sollicitudin neque, in venenatis diam vulputate ac. Proin pretium nulla mattis volutpat molestie. Donec sit amet enim tortor. Sed vel libero sed velit scelerisque tincidunt in quis dui. Aliquam sagittis vehicula ullamcorper. Proin scelerisque libero nec condimentum maximus. Proin luctus, ex a convallis lacinia, arcu libero condimentum elit, at luctus neque nisi vel purus. Nunc commodo fermentum interdum. Nunc et enim enim.",
+      "editora": 1,
+      "id": 6
+    },
+    {
+      "nome": "Mulher Maravilha",
+      "foto": "https://rollingstone.uol.com.br/media/_versions/mulher-maravilha_-_divulgacao_dc_comics_widelg.jpg",
+      "biografia": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tristique est risus, nec ornare lacus ultricies eget. Phasellus vehicula sollicitudin neque, in venenatis diam vulputate ac. Proin pretium nulla mattis volutpat molestie. Donec sit amet enim tortor. Sed vel libero sed velit scelerisque tincidunt in quis dui. Aliquam sagittis vehicula ullamcorper. Proin scelerisque libero nec condimentum maximus. Proin luctus, ex a convallis lacinia, arcu libero condimentum elit, at luctus neque nisi vel purus. Nunc commodo fermentum interdum. Nunc et enim enim.",
+      "editora": 1,
+      "id": 7
     }
   ],
   "editoras": [

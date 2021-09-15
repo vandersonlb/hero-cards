@@ -1,17 +1,17 @@
 import axios from "axios";
-const url = "http://localhost:3000";
+// const url = "http://localhost:3000";
 
 export default {
   getAllGroups() {
     return axios
-      .get(`${url}/editoras/`)
+      .get(`/editoras/`)
       .then((response) => response.data)
       .catch((error) => error);
   },
 
   getHeroesByGroup(groupId) {
     return axios
-      .get(`${url}/herois?editora=${groupId}`)
+      .get(`/herois?editora=${groupId}`)
       .then((response) => response.data)
       .catch((error) => error);
   },

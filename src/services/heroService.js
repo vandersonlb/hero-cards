@@ -1,31 +1,38 @@
 import axios from "axios";
-const url = "http://localhost:3000";
+// const url = "http://localhost:3000";
 
 export default {
   getAllHeroes() {
     return axios
-      .get(`${url}/herois`)
+      .get(`/herois`)
       .then((response) => response.data)
       .catch((error) => error);
   },
 
   getHero(heroiId) {
     return axios
-      .get(`${url}/herois/${heroiId}`)
+      .get(`/herois/${heroiId}`)
       .then((response) => response.data)
       .catch((error) => error);
   },
 
   addHero(heroi) {
     return axios
-      .post(`${url}/herois`, heroi)
+      .post(`/herois`, heroi)
+      .then((response) => response.data)
+      .catch((error) => error);
+  },
+
+  updateHero(heroi) {
+    return axios
+      .put(`/herois/${heroi.id}`, heroi)
       .then((response) => response.data)
       .catch((error) => error);
   },
 
   deleteHero(heroiId) {
     return axios
-      .delete(`${url}/herois/${heroiId}`)
+      .delete(`/herois/${heroiId}`)
       .then((response) => response.data)
       .catch((error) => error);
   },

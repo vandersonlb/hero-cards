@@ -1,125 +1,109 @@
 <template>
   <div id="app">
-    <v-container>
-      <h1>Cadastrar novo card</h1>
+    <h1 v-if="heroId" class="text-center mt-10 mb-8 primary--text">
+      Editar herói
+    </h1>
+    <h1 v-else class="text-center mt-10 mb-8 primary--text">Cadastrar herói</h1>
+
+    <v-card class="container">
       <form>
+        <v-text-field label="Nome" v-model="hero.nome" required></v-text-field>
         <v-text-field
-          v-model="name"
-          :error-messages="nameErrors"
-          :counter="10"
-          label="Name"
+          label="Foto"
+          v-model.lazy="hero.foto"
           required
-          @input="$v.name.$touch()"
-          @blur="$v.name.$touch()"
         ></v-text-field>
-        <v-text-field
-          v-model="email"
-          :error-messages="emailErrors"
-          label="E-mail"
+        <v-img
+          class="mb-6"
+          v-if="hero.foto"
+          max-height="250"
+          :src="hero.foto"
+        ></v-img>
+        <v-textarea
+          label="Biografia"
+          v-model="hero.biografia"
+          rows="3"
           required
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-        ></v-text-field>
+        ></v-textarea>
         <v-select
-          v-model="select"
-          :items="items"
-          :error-messages="selectErrors"
-          label="Item"
+          label="Editora"
+          v-model="hero.editora"
+          :items="groups"
+          item-text="nome"
+          item-value="id"
           required
-          @change="$v.select.$touch()"
-          @blur="$v.select.$touch()"
         ></v-select>
 
-        <v-btn class="mr-4" @click="submit"> submit </v-btn>
-        <v-btn @click="clear"> clear </v-btn>
+        <v-btn
+          v-if="heroId"
+          color="primary"
+          class="mr-4 mt-4"
+          @click="updateHero(hero)"
+        >
+          Salvar
+        </v-btn>
+
+        <v-btn v-else color="primary" class="mr-4 mt-4" @click="addHero">
+          Cadastrar
+        </v-btn>
+
+        <router-link
+          :to="{ name: 'home' }"
+          class="white--text text-decoration-none"
+        >
+          <v-btn text color="primary" class="mr-4 mt-4"> Voltar </v-btn>
+        </router-link>
       </form>
-    </v-container>
+    </v-card>
   </div>
 </template>
 
 <script>
-// import MyButton from "@/components/MyButton.vue";
-import Heroi from "@/models/Heroi";
-import gruposService from "@/services/gruposService";
-import heroisService from "@/services/heroisService";
+import Hero from "@/models/Hero";
+import groupService from "@/services/groupService";
+import heroService from "@/services/heroService";
 
 export default {
-  // components: { MyButton },
+  name: "Register",
   data() {
     return {
-      heroi: new Heroi(),
-      editoras: [],
+      hero: new Hero(),
+      groups: [],
+      heroId: this.$route.params.heroId,
     };
   },
   mounted() {
-    gruposService
+    groupService
       .getAllGroups()
-      .then(
-        (response) => (this.editoras = response.map((editora) => editora.nome))
-      );
+      .then((res) => (this.groups = res))
+      .catch((err) => console.error(err));
+
+    if (this.heroId)
+      heroService.getHero(this.heroId).then((res) => (this.hero = res));
   },
   methods: {
-    adicionaHeroi() {
-      heroisService
-        .addHero(this.heroi)
-        .then((res) => console.log(res))
-        .then((this.heroi = new Heroi()));
+    addHero() {
+      heroService
+        .addHero(this.hero)
+        .then(() => this.$router.push({ name: "home" }))
+        .then((this.hero = new Hero()))
+        .catch((err) => console.error(err));
+    },
+    updateHero(hero) {
+      heroService
+        .updateHero(hero)
+        .then(() => this.$router.push({ name: "home" }))
+        .then((this.hero = new Hero()))
+        .catch((err) => console.error(err));
     },
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .container {
-  width: 50% !important;
-}
-/*
-.form {
-  display: flex;
-  flex-wrap: wrap;
-  width: 40%;
+  width: 55% !important;
+  padding: 36px;
   margin: 0 auto;
-  padding: 15px 15px 25px;
-  border: 2px solid;
-  border-image: linear-gradient(90deg, darkgray 0%, gray 100%);
-  border-image-slice: 1;
-  &__item {
-    width: 100%;
-    text-align: left;
-    padding: 10px;
-    & img {
-      padding: 15px 15px 0px;
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      object-position: 50% 25%;
-    }
-    & label {
-      line-height: 2;
-      display: block;
-    }
-    & input,
-    & select {
-      width: 95%;
-      border: none;
-      border: 1.5px solid rgb(153, 153, 153);
-      padding: 5px 10px;
-      border-radius: 25px;
-      outline: none;
-      appearance: none;
-      &:focus {
-        border-color: rgb(44, 44, 44);
-      }
-    }
-    & select {
-      width: 98%;
-
-      &::-ms-expand {
-        display: none;
-        background-color: red;
-      }
-    }
-  }
 }
-*/
 </style>

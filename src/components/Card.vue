@@ -3,11 +3,16 @@
     <v-card-title> {{ hero.nome }} </v-card-title>
     <v-img :src="hero.foto" height="230px"></v-img>
     <v-card-subtitle> {{ comic }} </v-card-subtitle>
-    <v-card-text :title="hero.biografia">
+    <v-card-text style="min-height: 130px" :title="hero.biografia">
       {{ hero.biografia.substring(0, 150) }}...
     </v-card-text>
     <v-card-actions>
-      <v-btn color="primary" text> Editar </v-btn>
+      <router-link
+        :to="{ name: 'register', params: { heroId: hero.id } }"
+        class="white--text text-decoration-none"
+      >
+        <v-btn color="primary" text> Editar </v-btn>
+      </router-link>
       <v-btn color="error" @click="action(hero.id)" text> Excluir </v-btn>
       <v-spacer></v-spacer>
     </v-card-actions>
@@ -30,31 +35,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-/*
-.card {
-  border-radius: 10px;
-  padding: 10px;
-  width: 260px;
-  box-shadow: 1px 4px 10px rgb(196, 196, 196);
-  &__nome {
-    word-break: break-all;
-  }
-  &__imagem {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    object-position: 50% 20%;
-  }
-  &__superpoder {
-    font-size: 18px;
-    margin: 0;
-    margin-top: 20px;
-  }
-  &__editora {
-    margin: 10px 0 15px;
-  }
-}
-*/
-</style>

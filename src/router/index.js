@@ -2,10 +2,10 @@ export default [
   {
     path: "/",
     component: () => import("@/views/Crud.vue"),
-    name: "crud",
+    name: "home",
   },
   {
-    path: "/cadastro",
+    path: "/register",
     component: () => import("@/views/Register.vue"),
     name: "register",
   },

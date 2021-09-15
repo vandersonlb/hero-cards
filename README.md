@@ -2,7 +2,7 @@
 
 Projeto bem simples de CRUD de figurinhas de super heróis.
 
-O objetivo desse projeto é praticar os conceitos do Vue.js com requisições reais feitas com Vue Axios.
+O objetivo desse projeto é praticar os conceitos do Vue.js com requisições REST feitas com Vue Axios.
 
 ## Conteúdo
 
@@ -38,7 +38,7 @@ Baixando os modulos node
 npm install
 ```
 
-Compilando para desenvolvimento com hot-reload
+Compilando para desenvolvimento
 ```
 npm run serve
 ```
@@ -47,8 +47,44 @@ npm run serve
 
 ## Rotas
 
+Listar todos os heróis
 ```
-npm run lint
+GET /heroi
+```
+
+Listar um herói específico
+```
+GET /heroi/{heroiID}
+```
+
+Adicionar um herói
+```
+POST /heroi
+```
+
+Alterar dados de um herói
+```
+PUT /heroi/{heroiID}
+```
+
+Deletar um herói
+```
+DELETE /heroi/{heroiID}
+```
+
+Listar editoras
+```
+GET /editoras
+```
+
+Listar uma editora específica
+```
+GET /editoras/{editoraID}
+```
+
+Filtrar heróis por editora
+```
+GET /herois?editora={editoraID}
 ```
 
 ## Tecnologias
@@ -56,6 +92,7 @@ npm run lint
 - Sass
 - Javascript
 - Vue 2
+- Vue Router
 - Vue Axios
 - Vuetify
 - JSON Server
