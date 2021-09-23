@@ -1,4 +1,9 @@
-export default [
+import Vue from "vue";
+import VueRouter from "vue-router";
+
+Vue.use(VueRouter);
+
+const routes = [
   {
     path: "/",
     component: () => import("@/views/Crud.vue"),
@@ -10,3 +15,10 @@ export default [
     name: "register",
   },
 ];
+
+const router = new VueRouter({
+  routes,
+  mode: "history",
+});
+
+export default router;
