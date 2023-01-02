@@ -16,7 +16,7 @@
             flex-grow-1
             :hero="hero"
             :comic="group.comic.nome"
-            @delEmited="delHero"
+            @heroDeleted="delHeroFromView"
           ></my-card>
         </div>
       </v-container>
