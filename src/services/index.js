@@ -1,8 +1,10 @@
-import group from "./groupService";
-import hero from "./heroService";
+import axios from "axios";
 
-export default {
-  group,
-  hero,
-}
+export default axios.create({
+  baseURL: process.env.VUE_APP_API_ENDPOINT,
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': process.env.VUE_APP_API_TOKEN
 
+  }
+})
