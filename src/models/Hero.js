@@ -1,9 +1,10 @@
 class Hero {
-  constructor(nome, foto, biografia, editora) {
-    this.nome = nome;
-    this.foto = foto;
-    this.biografia = biografia;
-    this.editora = editora;
+  constructor(id, name, url, bio, publisher) {
+    this.id = id
+    this.name = name
+    this.img = [{ url }]
+    this.bio = bio
+    this.publisher = publisher
   }
 }
 
