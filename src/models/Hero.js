@@ -1,10 +1,10 @@
 class Hero {
-  constructor(id, name, url, bio, publisher) {
-    this.id = id
+  constructor(name, url, bio, publisher, id) {
     this.name = name
     this.img = [{ url }]
     this.bio = bio
     this.publisher = publisher
+    this.id = id
   }
 }
 

@@ -5,6 +5,7 @@ import App from "./App.vue";
 // import VueRouter from "vue-router";
 // import routes from "@/router";
 import router from "@/router";
+import store from "@/store";
 import vuetify from "./plugins/vuetify";
 
 // Vue.use(VueAxios, axios);
@@ -21,6 +22,7 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
+  store,
   vuetify,
   render: (h) => h(App),
 }).$mount("#app");
