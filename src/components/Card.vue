@@ -16,6 +16,7 @@
       ref="editModal"
       width="700"
       :hero="hero"
+      @refresh="() => this.$emit('refresh')"
     >
       <template v-slot:title> Editar </template>
       <template v-slot:content> Corpo </template>
@@ -36,9 +37,7 @@
 </template>
 
 <script>
-// import { mapActions } from "vuex";
-// import DeleteModal from "@/components/DeleteModal.vue"
-import RegisterModal from "@/components/RegisterModal.vue"
+import RegisterModal from "@/components/RegisterModal.vue";
 import DeleteModal from "@/components/DeleteModal.vue";
 
 export default {
@@ -59,7 +58,6 @@ export default {
   },
 
   methods: {
-    
     openEditModal() {
       this.$refs.editModal.openModal();
     },
@@ -67,25 +65,6 @@ export default {
     openDeleteModal() {
       this.$refs.deleteModal.openModal();
     },
-
-    /**
-     * 
-    emitRefresh() {
-      this.$emit("refresh")
-    }
-
-      ...mapActions(["deleteHero"]),
-    deleteHeroAction(id) {
-      this.progress = true;
-      this.deleteHero(id)
-        .then(() => {
-          this.dialog = false;
-          this.progress = false;
-          this.$emit("refresh");
-        })
-        .catch((err) => console.log(err));
-    },
-  **/
   },
 };
 </script>

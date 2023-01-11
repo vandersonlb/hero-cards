@@ -1,12 +1,41 @@
 <template>
-  <v-dialog v-model="dialog" max-width="600">
+  <v-dialog v-model="dialog" max-width="900">
     <v-card>
       <v-card-title class="text-h6 lighten-2">
-        EDITARRRRRR
+        Editar {{ hero.name }}
       </v-card-title>
 
       <v-card-text>
-        Tem certeza que deseja excluir {{ hero.name }}?
+        <form>
+          <v-text-field
+            label="Nome"
+            v-model="heroModel.name"
+            required
+          ></v-text-field>
+          <v-text-field
+            label="Foto (url)"
+            v-model.lazy="heroModel.image[0].url"
+            required
+          ></v-text-field>
+          <v-img
+            class="mb-6"
+            v-if="heroModel.image[0].url"
+            max-height="250"
+            :src="heroModel.image[0].url"
+          ></v-img>
+          <v-textarea
+            label="Biografia"
+            v-model="heroModel.bio"
+            rows="3"
+            required
+          ></v-textarea>
+          <v-select
+            label="Editora"
+            v-model="heroModel.publisher"
+            :items="publishers"
+            required
+          ></v-select>
+        </form>
         <v-progress-linear
           v-if="progress"
           class="mt-4"
@@ -21,9 +50,9 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click="dialog = false"> Fechar </v-btn>
-        <v-btn text color="primary" @click="deleteHeroAction(hero.id)">
-          Excluir
+        <v-btn text @click="dialog = false"> Cancelar </v-btn>
+        <v-btn text color="primary" @click="updateHeroAction(hero.id)">
+          Salvar
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -31,6 +60,7 @@
 </template>
 
 <script>
+import Hero from "@/models/Hero";
 import { mapActions } from "vuex";
 
 export default {
@@ -38,22 +68,19 @@ export default {
 
   data: () => ({
     dialog: false,
-    progress: false
+    progress: false,
+    publishers: ["DC Comics", "Marvel Comics", "Outro"],
+    heroModel: new Hero(),
   }),
 
   props: {
     hero: {
       type: Object,
-      required: true,
     },
   },
 
   methods: {
-    ...mapActions(["deleteHero"]),
-
-    toggleModal() {
-      this.dialog = !this.dialog;
-    },
+    ...mapActions(["updateHero"]),
 
     openModal() {
       this.dialog = true;
@@ -63,30 +90,38 @@ export default {
       this.dialog = false;
     },
 
-    testeEdit() {
-      this.$refs.editModal.openModal();
-    },
-
-    testeDelete() {
-      this.$refs.deleteModal.openModal();
-    },
-
-    deleteHeroAction(id) {
+    updateHeroAction(id) {
       this.progress = true;
-      this.deleteHero(id)
+
+      let data = {
+        fields: {
+          name: this.heroModel.name,
+          image: this.heroModel.image,
+          bio: this.heroModel.bio,
+          publisher: this.heroModel.publisher,
+        },
+      };
+
+      this.updateHero({ id, data })
         .then(() => {
           this.dialog = false;
           this.progress = false;
           this.$emit("refresh");
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.error(err));
     },
   },
 
   mounted() {
-    // console.log(6666);
-    // console.log(this.hero);
+    if (this.hero) {
+      this.heroModel = new Hero(
+        this.hero.name,
+        this.hero.image[0].url,
+        this.hero.bio,
+        this.hero.publisher,
+        this.hero.id
+      );
+    }
   },
 };
 </script>
-

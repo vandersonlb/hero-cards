@@ -21,7 +21,9 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click="dialog = false"> Fechar </v-btn>
+        <v-btn text @click="dialog = false">
+          Fechar
+        </v-btn>
         <v-btn text color="primary" @click="deleteHeroAction(hero.id)">
           Excluir
         </v-btn>
@@ -72,4 +74,3 @@ export default {
   },
 };
 </script>
-
