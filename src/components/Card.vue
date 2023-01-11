@@ -1,80 +1,91 @@
 <template>
   <v-card elevation="4">
-    <v-card-title> {{ hero.nome }} </v-card-title>
-    <v-img :src="hero.foto" height="230px"></v-img>
-    <v-card-subtitle> {{ comic }} </v-card-subtitle>
-    <v-card-text style="min-height: 130px" :title="hero.biografia">
-      {{ hero.biografia.substring(0, 150) }}...
+    <v-card-title> {{ hero.name }} </v-card-title>
+    <v-img lazy :src="hero.image[0].url" height="180px"></v-img>
+    <v-card-subtitle> {{ hero.publisher }} </v-card-subtitle>
+    <v-card-text class="mb-4" style="height: 100px">
+      {{ hero.bio.substring(0, 150) }}...
     </v-card-text>
+
     <v-card-actions>
-      <router-link
-        :to="{ name: 'register', params: { heroId: hero.id } }"
-        class="white--text text-decoration-none"
-      >
-        <v-btn text color="primary"> Editar </v-btn>
-      </router-link>
-      <!-- <v-btn color="error" @click="action(hero.id)" text> Excluir </v-btn> -->
-      <!-- <div class="text-center"> -->
-      <v-dialog v-model="dialog" width="500">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn text color="error" v-bind="attrs" v-on="on"> Excluir </v-btn>
-        </template>
-
-        <v-card>
-          <v-card-title class="text-h6 lighten-2">
-            Confirmar exclusão.
-          </v-card-title>
-
-          <v-card-text>
-            Tem certeza mesmo que deseja excluir {{ hero.nome }}?
-          </v-card-text>
-
-          <v-divider></v-divider>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn text @click="dialog = false">Fechar</v-btn>
-            <v-btn text color="primary" @click="deleteHero(hero.id)">Excluir</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      <!-- </div> -->
-      <v-spacer></v-spacer>
+      <v-btn text color="primary" @click="openEditModal"> Editar </v-btn>
+      <v-btn text color="error" @click="openDeleteModal"> Deletar </v-btn>
     </v-card-actions>
+
+    <RegisterModal
+      ref="editModal"
+      width="700"
+      :hero="hero"
+    >
+      <template v-slot:title> Editar </template>
+      <template v-slot:content> Corpo </template>
+    </RegisterModal>
+
+    <DeleteModal
+      ref="deleteModal"
+      width="500"
+      :hero="hero"
+      @refresh="() => this.$emit('refresh')"
+    >
+      <template v-slot:title> Confirmar exclusão </template>
+      <template v-slot:content>
+        Tem certeza que deseja excluir {{ hero.name }}?
+      </template>
+    </DeleteModal>
   </v-card>
 </template>
 
-
-<div id="app">
-  <v-app id="inspire">
-
-  </v-app>
-</div>
-
 <script>
-import api from "@/services";
+// import { mapActions } from "vuex";
+// import DeleteModal from "@/components/DeleteModal.vue"
+import RegisterModal from "@/components/RegisterModal.vue"
+import DeleteModal from "@/components/DeleteModal.vue";
 
 export default {
   name: "Card",
+
   data: () => ({
     dialog: false,
+    progress: false,
   }),
+
+  components: { RegisterModal, DeleteModal },
+
   props: {
-    hero: Object,
-    comic: String,
+    hero: {
+      type: Object,
+      required: true,
+    },
   },
+
   methods: {
-    action(heroiId) {
-      if (confirm("Deseja mesmo deletar?")) {
-        this.$emit("heroDeleted", heroiId);
-      }
+    
+    openEditModal() {
+      this.$refs.editModal.openModal();
     },
-    deleteHero(heroId) {
-      api.hero
-        .deleteHero(heroId)
-        .then(() => this.$emit("heroDeleted", heroId))
-        .catch((err) => console.error(err));
+
+    openDeleteModal() {
+      this.$refs.deleteModal.openModal();
     },
+
+    /**
+     * 
+    emitRefresh() {
+      this.$emit("refresh")
+    }
+
+      ...mapActions(["deleteHero"]),
+    deleteHeroAction(id) {
+      this.progress = true;
+      this.deleteHero(id)
+        .then(() => {
+          this.dialog = false;
+          this.progress = false;
+          this.$emit("refresh");
+        })
+        .catch((err) => console.log(err));
+    },
+  **/
   },
 };
 </script>
