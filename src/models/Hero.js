@@ -1,7 +1,7 @@
 class Hero {
-  constructor(name, url, bio, publisher, id) {
+  constructor(name, image, bio, publisher, id) {
     this.name = name
-    this.image = [{ url }]
+    this.image = image
     this.bio = bio
     this.publisher = publisher
     this.id = id

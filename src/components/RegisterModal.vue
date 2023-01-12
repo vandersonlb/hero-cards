@@ -2,40 +2,36 @@
   <v-dialog v-model="dialog" max-width="900">
     <v-card>
       <v-card-title class="text-h6 lighten-2">
-        Editar {{ hero.name }}
+        <span v-if="this.hero"> Editar {{ hero.name }} </span>
+        <span v-else> Criar novo card de herói </span>
       </v-card-title>
 
       <v-card-text>
-        <form>
+        <v-form>
           <v-text-field
             label="Nome"
-            v-model="heroModel.name"
-            required
+            v-model="newHero.name"
           ></v-text-field>
           <v-text-field
             label="Foto (url)"
-            v-model.lazy="heroModel.image[0].url"
-            required
+            v-model.lazy="newHero.image[0].url"
           ></v-text-field>
           <v-img
             class="mb-6"
-            v-if="heroModel.image[0].url"
             max-height="250"
-            :src="heroModel.image[0].url"
+            :src="newHero.image[0].url"
           ></v-img>
           <v-textarea
             label="Biografia"
-            v-model="heroModel.bio"
-            rows="3"
-            required
+            v-model="newHero.bio"
+            rows="2"
           ></v-textarea>
           <v-select
             label="Editora"
-            v-model="heroModel.publisher"
+            v-model="newHero.publisher"
             :items="publishers"
-            required
           ></v-select>
-        </form>
+        </v-form>
         <v-progress-linear
           v-if="progress"
           class="mt-4"
@@ -50,9 +46,27 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click="dialog = false"> Cancelar </v-btn>
-        <v-btn text color="primary" @click="updateHeroAction(hero.id)">
+        <v-btn 
+          text
+          @click="resetForm"
+        >
+          Cancelar
+        </v-btn>
+        <v-btn
+          v-if="this.hero"
+          text
+          color="primary"
+          @click="updateHeroAction"
+        >
           Salvar
+        </v-btn>
+        <v-btn
+          v-else
+          text
+          color="primary"
+          @click="createHeroAction"
+        >
+          Criar
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -70,7 +84,7 @@ export default {
     dialog: false,
     progress: false,
     publishers: ["DC Comics", "Marvel Comics", "Outro"],
-    heroModel: new Hero(),
+    newHero: new Hero(),
   }),
 
   props: {
@@ -80,7 +94,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(["updateHero"]),
+    ...mapActions(["updateHero", "addHero"]),
 
     openModal() {
       this.dialog = true;
@@ -90,19 +104,41 @@ export default {
       this.dialog = false;
     },
 
-    updateHeroAction(id) {
+    resetForm() {
+      this.closeModal()
+
+      if (this.hero) {
+        let {name, image, bio, publisher, id} = this.hero 
+        this.newHero = new Hero(name, undefined, bio, publisher, id);
+        this.newHero.image = [{url: image[0].url}]
+      } else {
+        this.newHero.image = [{url: undefined}]
+      }
+    },
+
+    updateHeroAction() {
       this.progress = true;
 
-      let data = {
-        fields: {
-          name: this.heroModel.name,
-          image: this.heroModel.image,
-          bio: this.heroModel.bio,
-          publisher: this.heroModel.publisher,
-        },
-      };
+      let {name, image, bio, publisher, id} = this.newHero
+      image = [{url: image[0].url}]
+      let data = {fields: {name, image, bio, publisher}}
 
-      this.updateHero({ id, data })
+      this.updateHero({id, data})
+        .then(() => {
+          this.dialog = false;
+          this.progress = false;
+          this.$emit("refresh");
+        })
+        .catch((err) => console.error(err));
+    },
+
+    createHeroAction() {
+      this.progress = true;
+
+      let {name, image, bio, publisher} = this.newHero
+      let data = {fields: {name, image, bio, publisher}}
+
+      this.addHero(data)
         .then(() => {
           this.dialog = false;
           this.progress = false;
@@ -112,16 +148,8 @@ export default {
     },
   },
 
-  mounted() {
-    if (this.hero) {
-      this.heroModel = new Hero(
-        this.hero.name,
-        this.hero.image[0].url,
-        this.hero.bio,
-        this.hero.publisher,
-        this.hero.id
-      );
-    }
+  beforeMount() {
+    this.resetForm()
   },
 };
 </script>

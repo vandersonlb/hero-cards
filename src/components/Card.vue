@@ -17,22 +17,14 @@
       width="700"
       :hero="hero"
       @refresh="() => this.$emit('refresh')"
-    >
-      <template v-slot:title> Editar </template>
-      <template v-slot:content> Corpo </template>
-    </RegisterModal>
+    />
 
     <DeleteModal
       ref="deleteModal"
       width="500"
       :hero="hero"
       @refresh="() => this.$emit('refresh')"
-    >
-      <template v-slot:title> Confirmar exclusão </template>
-      <template v-slot:content>
-        Tem certeza que deseja excluir {{ hero.name }}?
-      </template>
-    </DeleteModal>
+    />
   </v-card>
 </template>
 

@@ -15,8 +15,8 @@
               <v-row>
                 <v-col
                   class="col-12 col-sm-6 col-lg-3 col-xl-2"
-                  v-for="(hero, idx) in group"
-                  :key="idx"
+                  v-for="hero in group"
+                  :key="hero.id"
                 >
                   <Card :hero="hero" @refresh="heroGrouped = groupHeroes" />
                 </v-col>
@@ -24,10 +24,24 @@
             </v-container>
           </template>
 
-          <v-btn color="primary ma-4" fab dark fixed bottom right>
+          <v-btn
+            color="primary ma-4"
+            fab
+            dark
+            fixed
+            bottom
+            right
+            @click="openCreateModal"
+          >
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </v-container>
+
+        <RegisterModal
+          ref="createModal"
+          width="700"
+          @refresh="heroGrouped = groupHeroes"
+        />
       </v-main>
     </v-app>
   </div>
@@ -35,22 +49,26 @@
 
 <script>
 import Card from "@/components/Card.vue";
-import { mapState, mapActions, mapGetters } from "vuex";
+import RegisterModal from "@/components/RegisterModal.vue";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Home",
-  components: { Card },
+  components: { Card, RegisterModal },
   data: () => ({
     heroGrouped: undefined,
   }),
 
   computed: {
-    ...mapState(["heroList"]),
     ...mapGetters(["groupHeroes"]),
   },
 
   methods: {
     ...mapActions(["getHeroList"]),
+
+    openCreateModal() {
+      this.$refs.createModal.openModal();
+    },
   },
 
   mounted() {
