@@ -3,11 +3,17 @@
     <v-app>
       <v-main>
         <v-container>
-          <h1 class="text-center mt-8 mb-5 primary--text">Cards dos Heróis</h1>
+          <h1 class="black text-center mx-3">
+            <v-img
+              :height="$vuetify.breakpoint.xl ? 370 : 250"
+              contain
+              src="@/assets/banner_hero.png"
+            ></v-img>
+          </h1>
 
           <template v-if="heroGrouped">
             <v-container
-              class="my-5"
+              class="mb-5"
               v-for="(group, title) in heroGrouped"
               :key="title"
             >
