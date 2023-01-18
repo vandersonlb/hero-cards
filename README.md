@@ -1,6 +1,4 @@
-<div style="background-color: black">
-<img src="https://github.com/vandersonlb/hero-cards/blob/main/src/assets/banner_hero.png" width="100%" alt="Hero Cards"/>
-</div>
+<img src="https://github.com/vandersonlb/hero-cards/blob/main/src/assets/banner_hero_GH.jpg" width="100%" alt="Hero Cards"/>
 
 > Criação e edição de figurinhas heróis.
 
